@@ -183,7 +183,7 @@ flowchart LR
   A -- "HTTPS POST /v1/analyze, /v1/report\nHMAC-signed, bounded payload" --> B
   subgraph CR["Cloud Run (stateless)"]
     B[FastAPI\nauth · limits · logging] --> P[Pipeline]
-    P --> L[Local analysers\nauth · sender · subject · links ·\nattachments · content (7 languages) ·\nhistory · cloud · hidden text · images]
+       P --> L["Local analysers\nauth · sender · subject · links ·\nattachments · content in 7 languages ·\nhistory · cloud · hidden text · images"]
     P --> R[Reputation analyser\nbudgeted, time-boxed]
     P --> S[Scoring\ncaps · floors · confidence]
     S --> I[i18n\nEnglish / Hebrew]
