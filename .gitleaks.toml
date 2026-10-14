@@ -1,0 +1,13 @@
+# Secret scanning runs on every push. The paths below contain *deliberately fake* secrets used
+# to test MailGuard's own secret detector (derived from a hash, never valid). Nothing else is
+# allow-listed: a real key anywhere else in the repo fails the build.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Synthetic test fixtures for the exposure detector"
+paths = [
+  '''^samples/.*\.eml$''',
+  '''^samples/build_samples\.py$''',
+  '''^backend/tests/.*\.py$''',
+]
