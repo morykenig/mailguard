@@ -5,7 +5,7 @@
 > - **Security:** HMAC-signed requests *and* responses, no email storage, salted-hash sender memory, every email string treated as hostile; red-teamed (§10).
 > - **Where to look:** [what the user sees](#1-what-the-user-sees) · [architecture](#3-architecture) · [scoring](#5-scoring-model) · [security](#6-security-and-privacy) · [run it](#7-running-it) · [limitations](#8-trade-offs-and-limitations)
 >
-> 📊 **Presentation:** [MailGuard – How It Works (PDF)](MailGuard-presentation.pdf)
+> 📊 **Presentation:** https://github.com/morykenig/mailguard/blob/main/MailGuard%20%E2%80%93%20How%20It%20Works.pdf
 MailGuard is a Gmail add-on that scores the email you are reading from **0 to 100**, gives a
 **verdict** (Looks safe / Suspicious / Likely malicious), and explains **every point** of that
 score in plain language — together with what to do about it.
