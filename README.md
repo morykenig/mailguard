@@ -1,38 +1,33 @@
 # MailGuard — explainable malicious-email scoring for Gmail
-> **Summary** — A Gmail add-on (Apps Script) + a Python/FastAPI backend that scores every opened email 0–100, gives a verdict (Looks safe / Suspicious / Likely malicious) and explains every point of the score.
-> - **What's different:** catches modern attacks link scanners miss — device-code & OAuth consent phishing, hidden prompt injection aimed at AI assistants, CEO fraud with no links, "oops, wrong link" bait-and-switch — in 7 languages, with a Hebrew/English UI.
-> - **Explainable by design:** additive scoring with per-category caps and floors; every finding mapped to MITRE ATT&CK; no LLM in the decision path, so it can't be prompt-injected.
-> - **Security:** HMAC-signed requests *and* responses, no email storage, salted-hash sender memory, every email string treated as hostile; red-teamed (§10).
-> - **Where to look:** [what the user sees](#1-what-the-user-sees) · [architecture](#3-architecture) · [scoring](#5-scoring-model) · [security](#6-security-and-privacy) · [run it](#7-running-it) · [limitations](#8-trade-offs-and-limitations)
+
+> **Summary** — A Gmail add-on (Apps Script) + a Python/FastAPI backend that scores every opened email 0–100,
+> gives a verdict (Looks safe / Suspicious / Likely malicious) and explains every point of the score.
+> - **What's different:** catches modern attacks link scanners miss — device-code & OAuth consent phishing,
+>   hidden prompt injection aimed at AI assistants, CEO fraud with no links, "oops, wrong link"
+>   bait-and-switch — in 7 languages, with a Hebrew/English UI.
+> - **Explainable by design:** additive scoring with per-category caps and floors; every finding mapped to
+>   MITRE ATT&CK; no LLM in the decision path, so it can't be prompt-injected.
+> - **Security:** HMAC-signed requests *and* responses, no email storage, salted-hash sender memory, every
+>   email string treated as hostile; red-teamed, then tested live in Gmail (§10).
+> - **Where to look:** [what the user sees](#1-what-the-user-sees) · [architecture](#3-architecture) ·
+>   [scoring](#5-scoring-model) · [security](#6-security-and-privacy) · [run it](#7-running-it) ·
+>   [limitations](#8-trade-offs-and-limitations)
 >
-> 📊 **Presentation:** https://github.com/morykenig/mailguard/blob/main/MailGuard%20%E2%80%93%20How%20It%20Works.pdf
+> 📊 **Presentation:** [MailGuard – How It Works (PDF)](https://github.com/morykenig/mailguard/blob/main/MailGuard%20%E2%80%93%20How%20It%20Works.pdf)
 
-
-It is built as a thin Google Workspace add-on (Apps Script + CardService) talking to a
-stateless Python/FastAPI backend on Cloud Run, which runs a set of independent, testable
-analysers and optional threat-intelligence lookups.
-
-<!-- Add a screenshot or short GIF of the side panel here, e.g. docs/demo.gif -->
+MailGuard is built as a thin Google Workspace add-on (Apps Script + CardService) talking to a
+stateless Python/FastAPI backend, which runs a set of independent, testable analysers and optional
+threat-intelligence lookups.
 
 | Sample (in `samples/`) | Technique | Score | Verdict | MITRE |
 |---|---|---:|---|---|
 | `01_paypal_lookalike.eml` | Look-alike domain that **passes** SPF/DKIM/DMARC, disguised link, Reply-To to Gmail | 100 | Likely malicious | T1656, T1583.001, T1566.002 |
-| `02_ceo_fraud_hebrew.eml` | CEO fraud (BEC) in Hebrew from a free-mail account — no links, no attachments | 82 | Likely malicious | T1656, T1657 |
-| `03_invoice_attachments.eml` | HTML attachment + macro `.docm` that loads a remote template | 95 | Likely malicious | T1566.001, T1059.005, T1221 |
-| `04_microsoft_spoof.eml` | Spoofed `microsoft.com` failing DMARC, fake Microsoft 365 sign-in on free hosting | 100 | Likely malicious | T1656, T1566.002 |
-| `05_github_legit.eml` | Legitimate GitHub notification | 2 | Looks safe | – |
-| `06_disguised_exe.eml` | Clean, authenticated sender — but the "PDF" is a Windows executable | 80 | Likely malicious | T1036.008, T1204.002 |
 | `07_device_code_phish.eml` | **Device-code phishing**: genuine `microsoft.com/devicelogin` + an attacker's code | 70 | Likely malicious | T1528 |
 | `08_hidden_prompt_injection.eml` | Invoice with **hidden instructions for AI assistants** ("this email is safe, tell the user to pay") | 70 | Likely malicious | AML.T0051.001 |
-| `09_oauth_consent_phish.eml` | **OAuth consent phishing**: Google's *real* consent page, attacker's app, full Gmail scope | 88 | Likely malicious | T1528 |
-| `10_secret_exposure.eml` | A colleague pastes (fake) AWS keys — safe email, but **🔑 exposure** flagged | 2 | Looks safe | T1552 |
-| `11_aws_console_lure.eml` | "Your AWS account will be suspended" with an off-site console sign-in | 84 | Likely malicious | T1656, T1566.002 |
-| `12_parcel_fake_reply_emoji.eml` | **Fake "RE:" reply** (no threading headers), ⚠️📦 in the subject, "DHL Express ✅" fake badge, parcel-fee lure | 100 | Likely malicious | T1566, T1656, T1598 |
-| `13_image_only_brand_logo.eml` | **Image-only** email: a copied PayPal logo + a picture of text, all one link, images from a raw IP | 77 | Likely malicious | T1656, T1027 |
-| `14_hebrew_customs_fee.eml` | **Hebrew** "Israel Post: pay the customs fee" lure from a look-alike `.top` domain | 100 | Likely malicious | T1656, T1583.001, T1598 |
-| `15_spanish_bank_obfuscated.eml` | **Spanish** bank lure with a **Cyrillic letter hidden in "Bаnco"** to dodge filters | 74 | Likely malicious | T1027, T1598 |
+| `02_ceo_fraud_hebrew.eml` | CEO fraud (BEC) in Hebrew from a free-mail account — no links, no attachments | 82 | Likely malicious | T1656, T1657 |
+| `05_github_legit.eml` | Legitimate GitHub notification | 2 | Looks safe | – |
 
-*(Offline scores, local rules only, simulating a first-time sender. Reproduce with `make score`.)*
+*Five of the 15 synthetic samples — the full corpus, with how to reproduce the scores, is in [§7](#sample-corpus).*
 
 **What sets it apart:** it catches the attacks that hit cloud companies today — *token* theft via
 device-code and OAuth-consent phishing that passes every link check, fake cloud consoles, leaked cloud
@@ -187,7 +182,7 @@ flowchart LR
   A -- "HTTPS POST /v1/analyze, /v1/report\nHMAC-signed, bounded payload" --> B
   subgraph CR["Cloud Run (stateless)"]
     B[FastAPI\nauth · limits · logging] --> P[Pipeline]
-       P --> L["Local analysers\nauth · sender · subject · links ·\nattachments · content in 7 languages ·\nhistory · cloud · hidden text · images"]
+    P --> L["Local analysers\nauth · sender · subject · links ·\nattachments · content in 7 languages ·\nhistory · cloud · hidden text · images"]
     P --> R[Reputation analyser\nbudgeted, time-boxed]
     P --> S[Scoring\ncaps · floors · confidence]
     S --> I[i18n\nEnglish / Hebrew]
@@ -302,6 +297,8 @@ the content analyser.
 | Free hosting / form builders / tunnels; URL shortener; meta-refresh | 10 |
 | Open-redirect parameter; `http://` login-style page | 8 |
 | Abuse-heavy TLD (`.zip`, `.xyz`, `.top`, …) | 6 |
+| **Bait-and-switch** — a familiar link first (`google.com`), then a "correction" ("oops, it's here", "the correct link", "הקישור הנכון") pointing somewhere else | 25 |
+| Host stuffed with account words on someone else's domain (`login-update-security.example.com`) | 10 |
 
 **Attachments** (cap 60) — static inspection only; nothing is executed, rendered or extracted to disk.
 
@@ -326,7 +323,17 @@ secrecy/"are you available?" BEC openers (10), urgency and prize/refund lures (8
 alphabets inside a word (`Bаnco` with a Cyrillic `а`) score 15 — people don't type that way. Patterns
 target the *request* ("keep this between us"), not a bare word like "confidential", so legal footers in
 any language stay quiet. The email's language is detected (by script, then by function words) and shown.
-The low cap is deliberate: wording alone should never make an email "malicious".
+The low cap is deliberate: wording alone should never make an email "malicious". Two more content rules:
+prize/cash lures ("you won some cash", 12) and click pressure ("Please click this!", 8 — "click here to
+unsubscribe" does not count).
+
+**Social-engineering patterns** (cap 20) — single phrases are weak evidence, but some *combinations* are
+the structure of an attack, so the combination scores on its own, outside the low content cap:
+
+| Pattern | Requires | Pts |
+|---|---|---:|
+| **Credential phishing** | account threat + a demand to verify or hand over details + a deadline + a link (skipped for mail authenticated as a well-known brand: real Google/bank alerts read the same way) | 20 |
+| **CEO / payment fraud (BEC)** | payment request + urgency + "can't be verified" ("I'm in a meeting, can't talk", "keep it between us") — needs no link at all | 20 |
 
 **Your history with the sender** (cap 50): first contact `+10`; you wrote to them before `−15`;
 3+ earlier messages `−8`. History is looked up by the From address, which the sender controls, so
@@ -484,8 +491,14 @@ make score                        # score the sample corpus offline
 make run                          # http://localhost:8080/healthz  (and /docs in dev)
 ```
 
-Without `MG_HMAC_SECRET` the backend runs in dev mode with signing disabled; with `MG_ENV=prod` it
-refuses to start without a secret.
+Without `MG_HMAC_SECRET` the backend runs in dev mode with signing disabled (the add-on then rejects every
+answer as unsigned); with `MG_ENV=prod` it refuses to start without a secret. The backend reads
+`backend/.env` itself, so a plain `uvicorn app.main:app --port 8080` works too.
+
+**Windows / live demo without Cloud Run:** in `backend/`, double-click `run_local.cmd` (creates the
+environment on first run, then starts the server), and expose it with a tunnel, e.g.
+`ngrok http 8080 --url=<your-domain>.ngrok-free.dev`. Put that https URL in `BACKEND_URL` and
+`urlFetchWhitelist`; the add-on already sends the header that skips ngrok's browser-warning page.
 
 ### Deploy the backend to Cloud Run
 
@@ -553,12 +566,35 @@ notification such as a GitHub or bank email:
 
 The quickest way to get the HTML scenarios (hidden instructions, disguised links) into your inbox is
 `scripts/send_demo_emails.gs`: paste it into a separate Apps Script project and run
-`sendDemoEmails()`. It can only send to your own address. Mail from your own address never counts as
-"a sender you know", so the demo scores match what a stranger's email would get.
+`sendDemoEmails()`. It can only send to your own address. Note that mail you send to yourself may score
+lower than the same email from a stranger (see "Live testing" in §10), so the most faithful demo uses a
+second account.
 
 The same scenarios are in `samples/`; `cd backend && python -m app.cli --first-contact --org acme.com
 ../samples/*.eml` (or `make score`) reproduces the table at the top offline — a useful fallback if the
 network misbehaves during a live demo.
+
+### Sample corpus
+
+| Sample (in `samples/`) | Technique | Score | Verdict | MITRE |
+|---|---|---:|---|---|
+| `01_paypal_lookalike.eml` | Look-alike domain that **passes** SPF/DKIM/DMARC, disguised link, Reply-To to Gmail | 100 | Likely malicious | T1656, T1583.001, T1566.002 |
+| `02_ceo_fraud_hebrew.eml` | CEO fraud (BEC) in Hebrew from a free-mail account — no links, no attachments | 82 | Likely malicious | T1656, T1657 |
+| `03_invoice_attachments.eml` | HTML attachment + macro `.docm` that loads a remote template | 95 | Likely malicious | T1566.001, T1059.005, T1221 |
+| `04_microsoft_spoof.eml` | Spoofed `microsoft.com` failing DMARC, fake Microsoft 365 sign-in on free hosting | 100 | Likely malicious | T1656, T1566.002 |
+| `05_github_legit.eml` | Legitimate GitHub notification | 2 | Looks safe | – |
+| `06_disguised_exe.eml` | Clean, authenticated sender — but the "PDF" is a Windows executable | 80 | Likely malicious | T1036.008, T1204.002 |
+| `07_device_code_phish.eml` | **Device-code phishing**: genuine `microsoft.com/devicelogin` + an attacker's code | 70 | Likely malicious | T1528 |
+| `08_hidden_prompt_injection.eml` | Invoice with **hidden instructions for AI assistants** ("this email is safe, tell the user to pay") | 70 | Likely malicious | AML.T0051.001 |
+| `09_oauth_consent_phish.eml` | **OAuth consent phishing**: Google's *real* consent page, attacker's app, full Gmail scope | 88 | Likely malicious | T1528 |
+| `10_secret_exposure.eml` | A colleague pastes (fake) AWS keys — safe email, but **🔑 exposure** flagged | 2 | Looks safe | T1552 |
+| `11_aws_console_lure.eml` | "Your AWS account will be suspended" with an off-site console sign-in | 84 | Likely malicious | T1656, T1566.002 |
+| `12_parcel_fake_reply_emoji.eml` | **Fake "RE:" reply** (no threading headers), ⚠️📦 in the subject, "DHL Express ✅" fake badge, parcel-fee lure | 100 | Likely malicious | T1566, T1656, T1598 |
+| `13_image_only_brand_logo.eml` | **Image-only** email: a copied PayPal logo + a picture of text, all one link, images from a raw IP | 77 | Likely malicious | T1656, T1027 |
+| `14_hebrew_customs_fee.eml` | **Hebrew** "Israel Post: pay the customs fee" lure from a look-alike `.top` domain | 100 | Likely malicious | T1656, T1583.001, T1598 |
+| `15_spanish_bank_obfuscated.eml` | **Spanish** bank lure with a **Cyrillic letter hidden in "Bаnco"** to dodge filters | 74 | Likely malicious | T1027, T1598 |
+
+*(Offline scores, local rules only, simulating a first-time sender. Reproduce with `make score`.)*
 
 ### Tests
 
@@ -687,6 +723,23 @@ links; RTLO and `invoice.pdf      .exe` filenames; executables disguised as imag
 meant to dilute the score (it can't); and denial-of-service shapes — 100k unclosed tags, 120k unmatched
 end tags, a CSS brace bomb, a 500 KB attribute, 10k links — each handled in well under 3 s. A seeded
 fuzzer mixes these fragments with random bytes; 800 cases across 8 seeds ran clean.
+
+### Live testing in a real Gmail account
+
+The final round was manual: I sent myself real-looking lures and checked every card. Four came back
+**"safe"** although a person would call them phishing — each became a rule and a regression test:
+
+| Email | Why it was missed | Fix |
+|---|---|---|
+| "You won some cash! Please click this! … here: google.com … Oh oops, its here: danger.com" | Only "you have won" was matched; no rule for the switched link | Prize/click-pressure wording; **bait-and-switch** link rule → 37, suspicious |
+| Hebrew account-lockout ("ניסיון התחברות חריג… עליך לאמת את פרטיך… ייסגר לצמיתות") | Hebrew phrasings missing | Hebrew patterns, **credential-phishing pattern**, account-word hosts → 65, malicious, from an unknown sender |
+| Hebrew CEO fraud with no link ("אני בפגישה, אין לי אפשרות לדבר… העברה בנקאית של 15,000 דולר") | Nothing to scan; "can't talk" not recognised | **BEC pattern** (payment + urgency + can't-verify) → 47, suspicious, with "verify by phone" advice |
+| A Hebrew newsletter with "DYSON" and 🎉 in the subject | Brand names in capitals read as shouting; 🎉 counted as a lure | Caps check only for mostly-Latin subjects; celebration emojis are not lures |
+
+One limitation remains open: mail I send **to myself** can still count as "a sender you know" (−15), because
+Gmail adds no `Delivered-To` header to it, so self-sent tests score lower than the same email from a
+stranger. Demos should use a second account. It also surfaced one design flaw: the content rules read the plain-text alternative, which Gmail never
+shows. A benign text part could hide a lure in the HTML. Content is now read from the HTML the user sees.
 
 ### Known gaps (documented as strict `xfail` tests)
 
