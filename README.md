@@ -5,7 +5,7 @@
 > - **Security:** HMAC-signed requests *and* responses, no email storage, salted-hash sender memory, every email string treated as hostile; red-teamed (§10).
 > - **Where to look:** [what the user sees](#1-what-the-user-sees) · [architecture](#3-architecture) · [scoring](#5-scoring-model) · [security](#6-security-and-privacy) · [run it](#7-running-it) · [limitations](#8-trade-offs-and-limitations)
 >
-> 📊 **Presentation:** https://github.com/morykenig/mailguard/blob/main/MailGuard%20%E2%80%93%20How%20It%20Works.pdf
+> 📊 **Presentation:** MailGuard – How It Works.pdf
 
 
 It is built as a thin Google Workspace add-on (Apps Script + CardService) talking to a
