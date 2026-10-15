@@ -1,5 +1,11 @@
 # MailGuard — explainable malicious-email scoring for Gmail
-
+> **TL;DR** — A Gmail add-on (Apps Script) + a Python/FastAPI backend that scores every opened email 0–100, gives a verdict (Looks safe / Suspicious / Likely malicious) and explains every point of the score.
+> - **What's different:** catches modern attacks link scanners miss — device-code & OAuth consent phishing, hidden prompt injection aimed at AI assistants, CEO fraud with no links, "oops, wrong link" bait-and-switch — in 7 languages, with a Hebrew/English UI.
+> - **Explainable by design:** additive scoring with per-category caps and floors; every finding mapped to MITRE ATT&CK; no LLM in the decision path, so it can't be prompt-injected.
+> - **Security:** HMAC-signed requests *and* responses, no email storage, salted-hash sender memory, every email string treated as hostile; red-teamed (§10).
+> - **Where to look:** [what the user sees](#1-what-the-user-sees) · [architecture](#3-architecture) · [scoring](#5-scoring-model) · [security](#6-security-and-privacy) · [run it](#7-running-it) · [limitations](#8-trade-offs-and-limitations)
+>
+> 📊 **Presentation:** [MailGuard – How It Works (PDF)](MailGuard-presentation.pdf)
 MailGuard is a Gmail add-on that scores the email you are reading from **0 to 100**, gives a
 **verdict** (Looks safe / Suspicious / Likely malicious), and explains **every point** of that
 score in plain language — together with what to do about it.
