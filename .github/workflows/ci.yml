@@ -1,0 +1,29 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip, cache-dependency-path: backend/requirements-dev.txt }
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: pip install -r backend/requirements-dev.txt
+      - name: Lint
+        run: make lint
+      - name: Unit and corpus tests
+        run: make test
+      - name: Add-on render test (mocked Apps Script)
+        run: make addon-test
+      - name: Dependency vulnerability audit
+        run: pip-audit -r backend/requirements.txt
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: gitleaks/gitleaks-action@v2  # honours .gitleaks.toml
+        env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
