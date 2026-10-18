@@ -790,6 +790,5 @@ scripts/deploy_backend.sh  Cloud Run + Secret Manager deployment (incl. key rota
 scripts/send_demo_emails.gs  sends the demo scenarios to your own inbox
 .github/                   CI, CodeQL, Dependabot
 SECURITY.md, .gitleaks.toml  disclosure policy; secret-scanning allow-list for synthetic fixtures
-GETTING_STARTED_HE.md      step-by-step setup checklist (Hebrew)
 MAILGUARD_HE.md            full explanation of the project in Hebrew
 ```
