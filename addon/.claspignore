@@ -1,0 +1,3 @@
+# Only the add-on itself is pushed to Apps Script.
+test/**
+.clasp.json.example
