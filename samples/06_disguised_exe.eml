@@ -1,0 +1,32 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass header.i=@levi-design.co.il
+ header.s=s1 header.b=AbCdEf12; spf=pass (google.com: domain of
+ bounce@levi-design.co.il) smtp.mailfrom=bounce@levi-design.co.il; dmarc=pass
+ (p=NONE sp=NONE dis=NONE) header.from=levi-design.co.il
+From: "Ron Levi" <ron@levi-design.co.il>
+To: you@example.org
+Subject: the scan you asked for
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <03c531c517e4986a@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============1749375488822753565=="
+
+--===============1749375488822753565==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi, attached is the scan. Ron
+
+--===============1749375488822753565==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Scan_Document.pdf"
+MIME-Version: 1.0
+
+TVqQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAFRoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIERPUyBtb2RlIChpbmVydCBzYW1w
+bGUp
+
+--===============1749375488822753565==--

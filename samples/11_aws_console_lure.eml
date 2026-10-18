@@ -1,0 +1,34 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass
+ header.i=@aws-account-services.com header.s=s1 header.b=AbCdEf12; spf=pass
+ (google.com: domain of bounce@aws-account-services.com)
+ smtp.mailfrom=bounce@aws-account-services.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=aws-account-services.com
+From: "AWS Billing" <billing-alerts@aws-account-services.com>
+To: you@example.org
+Subject: Action required: your AWS account will be suspended
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <868cef08730de37a@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5060002936713520448=="
+
+--===============5060002936713520448==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Your payment failed. Sign in to the AWS Console to avoid suspension.
+
+--===============5060002936713520448==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Your latest payment failed. Resources in your account will be terminated i=
+n 24 hours.</p><p><a href=3D"https://aws-account-services.com/console/signin"=
+>Sign in to the AWS Console</a> to update your billing details.</p><p>Amazon =
+Web Services</p>
+
+--===============5060002936713520448==--

@@ -1,0 +1,24 @@
+Delivered-To: you@acme.com
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=none; spf=pass (google.com: domain
+ of bounce@israelpost-delivery.top)
+ smtp.mailfrom=bounce@israelpost-delivery.top; dmarc=none (p=NONE sp=NONE
+ dis=NONE) header.from=israelpost-delivery.top
+From:
+ =?utf-8?b?15PXldeQ16gg15nXqdeo15DXnA==?= <no-reply@israelpost-delivery.top>
+To: you@acme.com
+Subject: =?utf-8?b?15PXl9eV16M6INeU15fXkdeZ15zXlCDXqdec15og157Xnteq15nXoNeU?=
+ =?utf-8?b?INec16rXqdec15XXnSDXnteb16E=?=
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <14334a8dc5844ed9@mail.example>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+
+16nXnNeV150sCteU15fXkdeZ15zXlCDXqdec15og15TXkteZ16LXlCDXnNee16jXm9eWINeU157X
+mdeV158g15XXntei15XXm9eR16og15HXqdecINeX15XXkSDXk9ee15kg157Xm9ehINeR16HXmiA5
+LjkwINepIteXLgrXmdepINec15TXodeT15nXqCDXkNeqINeU16rXqdec15XXnSDXqteV15ogMjQg
+16nXoteV16osINeQ15fXqNeqINeU15fXkdeZ15zXlCDXqteV15fXlteoINec16nXldec15cuCtec
+16rXqdec15XXnTogaHR0cHM6Ly9pc3JhZWxwb3N0LWRlbGl2ZXJ5LnRvcC9wYXkvSUw3NzMxCteT
+15XXkNeoINeZ16nXqNeQ15wK

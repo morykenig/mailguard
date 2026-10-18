@@ -1,0 +1,34 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass
+ header.i=@account-review-center.com header.s=s1 header.b=AbCdEf12; spf=pass
+ (google.com: domain of bounce@account-review-center.com)
+ smtp.mailfrom=bounce@account-review-center.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=account-review-center.com
+From: "PayPal" <service@account-review-center.com>
+To: you@example.org
+Subject: Account notice
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <2897fb961c2eab35@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5310707377574767654=="
+
+--===============5310707377574767654==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+View this message in a browser.
+
+--===============5310707377574767654==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<a href=3D"https://account-review-center.com/r/7731"><img src=3D"http://203.0=
+.113.50/img/paypal-logo.png" alt=3D"PayPal logo" width=3D"180" height=3D"48">=
+<img src=3D"http://203.0.113.50/img/notice.png" alt=3D"" width=3D"600" height=
+=3D"420"></a><img src=3D"http://203.0.113.50/o.gif" width=3D"1" height=3D"1">
+
+--===============5310707377574767654==--

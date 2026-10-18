@@ -1,0 +1,31 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=none; spf=fail (google.com: domain
+ of bounce@microsoft.com) smtp.mailfrom=bounce@microsoft.com; dmarc=fail
+ (p=REJECT sp=REJECT dis=NONE) header.from=microsoft.com
+From: "Microsoft 365" <no-reply@microsoft.com>
+To: you@example.org
+Subject: Unusual sign-in activity
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <af59346c69050517@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============2088497243920707963=="
+
+--===============2088497243920707963==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+We detected unusual sign-in activity.
+
+--===============2088497243920707963==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>We detected unusual sign-in activity on your account.</p><p><a href=3D"htt=
+ps://sites.google.com/view/ms-secure-review">Review recent activity</a> or <a=
+ href=3D"https://bit.ly/3xFakeMs">keep my account</a> immediately.</p>
+
+--===============2088497243920707963==--

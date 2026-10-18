@@ -1,0 +1,32 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass header.i=@github.com
+ header.s=s1 header.b=AbCdEf12; spf=pass (google.com: domain of
+ bounce@github.com) smtp.mailfrom=bounce@github.com; dmarc=pass (p=REJECT
+ sp=REJECT dis=NONE) header.from=github.com
+From: "GitHub" <noreply@github.com>
+To: you@example.org
+Subject: [acme/api] Pull request #42 merged
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <49a6daa9d747ee75@mail.example>
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============8462735014123177509=="
+
+--===============8462735014123177509==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Merged #42 into main.
+
+--===============8462735014123177509==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Merged <a href=3D"https://github.com/acme/api/pull/42">#42</a> into main.<=
+/p><p><a href=3D"https://github.com/settings/notifications">Notification sett=
+ings</a></p>
+
+--===============8462735014123177509==--

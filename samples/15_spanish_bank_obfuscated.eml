@@ -1,0 +1,20 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=none; spf=softfail (google.com:
+ domain of bounce@seguridad-clientes.xyz)
+ smtp.mailfrom=bounce@seguridad-clientes.xyz; dmarc=none (p=NONE sp=NONE
+ dis=NONE) header.from=seguridad-clientes.xyz
+From: "Seguridad Bancaria" <alertas@seguridad-clientes.xyz>
+To: you@example.org
+Subject: Su cuenta de =?utf-8?q?B=D0=B0nco_ser=C3=A1?= bloqueada
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <4ea03688d9dbce02@mail.example>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+Estimado cliente: su cuenta ser=C3=A1 bloqueada hoy. Verifique su cuenta y co=
+nfirme su contrase=C3=B1a en las pr=C3=B3ximas 24 horas: https://seguridad-cl=
+ientes.xyz/acceso
+Departamento de Seguridad del B=D0=B0nco

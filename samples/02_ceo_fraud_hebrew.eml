@@ -1,0 +1,23 @@
+Delivered-To: you@acme.com
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass header.i=@gmail.com
+ header.s=s1 header.b=AbCdEf12; spf=pass (google.com: domain of
+ bounce@gmail.com) smtp.mailfrom=bounce@gmail.com; dmarc=pass (p=NONE sp=NONE
+ dis=NONE) header.from=gmail.com
+From: "Dana Cohen | CEO" <dana.cohen.office@gmail.com>
+To: you@acme.com
+Subject: =?utf-8?b?15HXp9ep15Qg15PXl9eV16TXlA==?=
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <e03b2c698afb48bc@mail.example>
+Reply-To: dana.ceo.private@outlook.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+
+15TXmdeZLCDXkNeq15Qg15bXnteZ158/CteQ16DXmSDXkdek15LXmdep15Qg15XXnNeQINeZ15vX
+ldec15Qg15zXk9eR16guINem16jXmdeb15Qg157XnteaINeY15XXkdeUINeT15fXldek15QgLSDX
+lNei15HXqNeUINeR16DXp9eQ15nXqiDXnNeh16TXpyDXl9eT16kg15TXmdeV150sINek16jXmNeZ
+INeX16nXkdeV158g15TXkdeg16cg16LXldeT15vXoNeVINeV15DXqdec15cg15zXmiDXkNeV16rX
+nSDXnteZ15MuCteq16nXnteV16gg15DXqiDXlteUINeR15nXoNeZ16DXlSDXkdeZ16DXqteZ15nX
+nS4K15PXoNeUCg==

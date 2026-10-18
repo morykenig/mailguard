@@ -1,0 +1,35 @@
+Delivered-To: you@example.org
+Received:
+ by 2002:a05:6a10:1234 with SMTP id x1csp1;  Mon, 12 Oct 2026 02:30:00 -0700
+Authentication-Results: mx.google.com; dkim=pass header.i=@paypa1-secure.com
+ header.s=s1 header.b=AbCdEf12; spf=pass (google.com: domain of
+ bounce@paypa1-secure.com) smtp.mailfrom=bounce@paypa1-secure.com; dmarc=pass
+ (p=NONE sp=NONE dis=NONE) header.from=paypa1-secure.com
+From: "PayPal Service" <service@paypa1-secure.com>
+To: you@example.org
+Subject: Your account has been limited
+Date: Mon, 12 Oct 2026 09:30:00 +0000
+Message-ID: <21eee8623dce1aac@mail.example>
+Reply-To: resolution.center.pp@gmail.com
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============0710611909069202679=="
+
+--===============0710611909069202679==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+We noticed unusual activity. Verify your account within 24 hours: https://www=
+.paypal.com/signin
+
+--===============0710611909069202679==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<p>Dear customer,</p><p>We noticed <b>unusual activity</b> on your account. Y=
+our account has been limited until you verify your account within 24 hours.</=
+p><p><a href=3D"http://paypa1-secure.com/login/verify?session=3D8812">https:/=
+/www.paypal.com/signin</a></p><p>PayPal Security Team</p>
+
+--===============0710611909069202679==--
