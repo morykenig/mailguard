@@ -25,5 +25,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
-      - uses: gitleaks/gitleaks-action@v2  # honours .gitleaks.toml
+      - uses: gitleaks/gitleaks-action@v3  # honours .gitleaks.toml
         env: { GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" }
